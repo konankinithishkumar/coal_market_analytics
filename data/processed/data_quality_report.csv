@@ -1,0 +1,25 @@
+Dataset,Check,Status,Detail
+production,No missing values,PASS,0 missing cells
+production,No duplicate keys,PASS,"0 duplicate rows on ['Year', 'Country']"
+consumption,No missing values,PASS,0 missing cells
+consumption,No duplicate keys,PASS,"0 duplicate rows on ['Year', 'Country']"
+trade,No missing values,PASS,0 missing cells
+trade,No duplicate keys,PASS,"0 duplicate rows on ['Year', 'Trade_Role', 'Country']"
+prices,No missing values,PASS,0 missing cells
+prices,No duplicate keys,PASS,0 duplicate rows on ['Year']
+production,Every country has contiguous years 2014-2024,PASS,all 5 countries complete
+consumption,Every country has contiguous years 2014-2024,PASS,all 5 countries complete
+production/consumption,Same country set in both files,PASS,
+production,All values > 0,PASS,0 non-positive values
+consumption,All values > 0,PASS,0 non-positive values
+trade,All values > 0,PASS,0 non-positive values
+production,No YoY move above 40%,PASS,
+consumption,YoY move above 40% needs source check,WARN,Indonesia 2023 (+59.3%). Verify against the Energy Institute workbook (possible series revision).
+production,Production below 5 Mt (low base),WARN,Japan: YoY % swings on tiny absolute changes; interpret CAGR with care.
+trade,2023: EJ / share implies one consistent world-trade total,PASS,"implied world trade 35.43 EJ, spread 0.2%"
+trade,2024: EJ / share implies one consistent world-trade total,PASS,"implied world trade 36.01 EJ, spread 0.5%"
+trade,Share of world trade per role does not exceed 100%,PASS,
+trade,Same exporter/importer list in 2023 and 2024,WARN,Missing in 2024: Russian Federation (Exporter). Year-on-year change and concentration are computed only on the comparable set.
+prices,Annual price history 2021-2025 vs market data 2014-2024,WARN,"Price history is shorter than production/consumption history. Extend with the World Bank Pink Sheet annual series (see README, 'Extending the price history')."
+prices,2025 annual price equals mean of 2025 quarters,PASS,quarterly mean 108.4 vs annual 108.4
+price_detail,Mixed granularity in 'Period' (quarters and months),INFO,Split into Period_Type (Quarter/Month) in price_detail_clean.csv; do not average across types.

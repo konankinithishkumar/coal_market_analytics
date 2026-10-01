@@ -1,0 +1,29 @@
+DATA SOURCES
+
+1. Energy Institute, Statistical Review of World Energy 2025
+   Official downloads: https://www.energyinst.org/statistical-review/resources-and-data-downloads
+   Used for: coal production (Mt, 2014-2024), coal consumption (EJ, 2014-2024),
+             selected coal trade by exporter/importer (EJ, 2023-2024).
+
+2. World Bank, Commodity Markets / Pink Sheet
+   Official source: https://www.worldbank.org/en/research/commodity-markets
+   Used for: Australian thermal coal benchmark price (USD per tonne), 2021-2025 annual
+             plus quarterly/monthly detail 2024-Q3 to 2026-01.
+
+FILES
+- coal_production_ei_2014_2024.csv     Year, Country, Coal_Production_Mt
+- coal_consumption_ei_2014_2024.csv    Year, Country, Coal_Consumption_EJ
+- coal_trade_selected_2023_2024.csv    Year, Trade_Role, Country, Coal_Trade_EJ, Share_of_World_Trade_pct
+- coal_price_worldbank_2021_2025.csv   Year, Australia_Thermal_Coal_Price_USD_per_mt
+- coal_price_detail_worldbank.csv      Period (quarters "YYYY-Qn" AND months "YYYY-MM" mixed), Price_USD_per_mt
+
+KNOWN DATA ISSUES (flagged automatically by python/market_analysis.py, see data/processed/data_quality_report.csv)
+- Indonesia consumption rises 59.3% in 2023 (2.75 -> 4.38 EJ). Verify against the Energy Institute workbook.
+- Russian Federation appears as an exporter in 2023 but not in 2024. Like-for-like comparisons exclude it.
+- Price history (2021-2025) is shorter than production/consumption history (2014-2024).
+- Japan production is about 0.5 Mt, so its percentage changes are not meaningful.
+- Trade covers selected countries only; "share of world trade" uses the Energy Institute's world total.
+
+REFRESHING THE DATA
+Download the Energy Institute and Pink Sheet workbooks from the links above, copy the relevant columns into the CSV
+files in this folder (keep the same headers), then run: python python/market_analysis.py
